@@ -22,5 +22,36 @@ for i in range(1000):
 
 # p.pprint(hist)
 
-data = [go.Histogram(x = squares)]
-plot_url = py.plot(data, filename = 'histogram')
+#from plot.ly example https://plot.ly/python/histograms/
+
+trace1 = go.Histogram(
+    x=squares,
+    histnorm='count',
+    name='control',
+    # autobinx=False,
+    marker=dict(
+        color='fuchsia',
+        line=dict(
+            color='grey',
+            width=0
+        )
+    ),
+    opacity=0.75
+)
+
+data = [trace1]
+
+layout = go.Layout(
+    title='Random Histogram',
+    xaxis=dict(
+        title='Bin'
+    ),
+    yaxis=dict(
+        title='Count'
+    ),
+    barmode='overlay',
+    bargap=0.25
+	)
+
+fig = go.Figure(data=data, layout=layout)
+plot_url = py.plot(fig, filename='style-histogram')
